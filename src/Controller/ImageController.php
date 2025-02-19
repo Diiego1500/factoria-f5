@@ -39,9 +39,25 @@ final class ImageController extends AbstractController
         return $this->render('image/list.html.twig', ['form' => $form->createView(), 'images' => $images]);
     }
 
-    #[Route('/edit-image', name: 'editImage')]
-    public function editImage() {
-        return $this->render('image/edit.html.twig');
+    #[Route('/edit-image/{id}', name: 'editImage')]
+    public function editImage(Image $image, Request $request) {
+        $form = $this->createForm(ImageType::class, $image);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('filename')->getData();
+            if ($file) {
+                if ($image->getFilename()) { // Delete previous from S3
+                    $this->fileService->deleteFile($image->getFilename());
+                }
+                $filename = $this->fileService->uploadFile($file); // Upload new file to S3
+                if ($filename !== null) {
+                    $image->setFilename($filename);
+                }
+            }
+            $this->em->flush();
+            return $this->redirectToRoute('list');
+        }
+        return $this->render('image/edit.html.twig', ['form' => $form->createView()]);
     }
 
     #[Route('/delete-image/{id}', name: 'deleteImage')]
