@@ -10,15 +10,16 @@
 {% block body %}
     {{ parent() }}
     <div class="container">
-        <div class="text-center p-2 my-3 border">
+        <div class="text-center p-4 my-3 border bg-white rounded">
             <h1>Biblioteca de Imágenes.</h1>
+            <h4>Versión de la plataforma: V2</h4>
             <p>En el siguiente botón encontrarás un formulario para subir tus imágenes favoritas</p>
             <div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UploadImageModal">Sube y Comparte tus imagenes</button></div>
         </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="masonry">
             {% for image in images %}
-                <div class="col">
-                    <div class="card h-100">
+                <div class="masonry-item">
+                    <div class="card">
                         <img src="{{ aws_bucket_link_thumbnail ~ image.filename }}"
                              class="card-img-top image"
                              alt="{{ image.title }}"
@@ -47,9 +48,7 @@
                     </div>
                 </div>
             {% else %}
-                <div class="col-md-12 alert alert-warning my-4">
-                    Aun No hay imágenes en nuestros registros.
-                </div>
+                <div class="alert alert-warning my-4">No images available.</div>
             {% endfor %}
         </div>
     </div>
