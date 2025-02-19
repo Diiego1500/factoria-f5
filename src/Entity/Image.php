@@ -43,6 +43,10 @@ class Image
 
     public function setTitle(string $title): static
     {
+        if ($title === '') {
+            throw new \InvalidArgumentException('Title Cannot Be empty');
+        }
+
         $this->title = $title;
 
         return $this;
@@ -79,6 +83,10 @@ class Image
 
     public function setFilename(string $filename): static
     {
+        if ($filename === '') {
+            throw new \InvalidArgumentException('Filename cannot be empty');
+        }
+
         $this->filename = $filename;
 
         return $this;
