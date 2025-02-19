@@ -7,6 +7,7 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "artprima/prometheus-metrics-bundle": "^1.19",
         "aws/aws-sdk-php": "^3.339",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.13",
