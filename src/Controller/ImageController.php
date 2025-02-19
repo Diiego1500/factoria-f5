@@ -46,6 +46,9 @@ final class ImageController extends AbstractController
 
     #[Route('/delete-image/{id}', name: 'deleteImage')]
     public function deleteImage(Image $image) {
+        $this->fileService->deleteFile($image->getFilename()); // Delete Image from S3
+        $this->em->remove($image); // Delete from Database
+        $this->em->flush();
         return $this->redirectToRoute('list');
     }
 
