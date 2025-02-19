@@ -40,13 +40,20 @@ class FileService {
     }
 
     public function deleteFile(string $fileName) {
+        $this->deleteFromBucket($_ENV['AWS_BUCKET_NAME'], $fileName); // Delete Original Image From S3
+        $this->deleteFromBucket($_ENV['AWS_BUCKET_NAME_THUMBNAILS'], $fileName); // Delete Thumbnmail Image From S3
+    }
+
+    private function deleteFromBucket($bucketName, $fileName) {
         try {
             $this->s3->deleteObject([
-                'Bucket' => $_ENV['AWS_BUCKET_NAME'],
-                'Key' => $fileName
-            ]);
+                'Bucket' => $bucketName,
+            'Key' => $fileName
+        ]);
         } catch (Exception $e) {
             throw new Exception('Algo salió mal: ' . $e->getMessage());
         }
+
     }
+
 }
