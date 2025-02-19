@@ -15,4 +15,14 @@ class ImageRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Image::class);
     }
+
+    public function getAllImages() {
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT image
+                FROM App\Entity\Image image
+                ORDER BY image.id DESC
+            ')
+            ->getArrayResult();
+    }
 }

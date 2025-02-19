@@ -14,6 +14,13 @@
             {% for image in images %}
                 <div class="col">
                     <div class="card h-100">
+                        <img src="{{ aws_bucket_link_thumbnail ~ image.filename }}"
+                             class="card-img-top image"
+                             alt="{{ image.title }}"
+                             data-id="{{ image.id }}"
+                             data-bs-toggle="modal"
+                             data-bs-target="#ShowImageModa"
+                             onerror="this.onerror=null; this.src='{{ aws_bucket_link ~ image.filename }}';">
                         <div class="card-body">
                             <h5 class="card-title text-uppercase">{{ image.title }}</h5>
                             <p class="card-text">{{ image.description }}</p>
@@ -50,7 +57,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Here the Upload Form
+                    {{ form(form) }}
                 </div>
             </div>
         </div>

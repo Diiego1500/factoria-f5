@@ -26,6 +26,11 @@ class Image
     #[ORM\Column(length: 255)]
     private ?string $filename = null;
 
+    public function __construct() {
+        $this->creation_date = new \DateTime();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
