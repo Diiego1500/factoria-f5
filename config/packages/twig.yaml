@@ -1,5 +1,9 @@
 twig:
+    globals:
+        aws_bucket_link: '%env(AWS_BUCKET_URL)%'
+        aws_bucket_link_thumbnail: '%env(AWS_BUCKET_URL_THUMBNAIL)%'
     file_name_pattern: '*.twig'
+    form_themes: ['bootstrap_5_layout.html.twig']
 
 when@test:
     twig:

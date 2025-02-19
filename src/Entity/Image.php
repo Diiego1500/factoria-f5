@@ -26,6 +26,11 @@ class Image
     #[ORM\Column(length: 255)]
     private ?string $filename = null;
 
+    public function __construct() {
+        $this->creation_date = new \DateTime();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -38,6 +43,10 @@ class Image
 
     public function setTitle(string $title): static
     {
+        if ($title === '') {
+            throw new \InvalidArgumentException('Title Cannot Be empty');
+        }
+
         $this->title = $title;
 
         return $this;
@@ -74,6 +83,10 @@ class Image
 
     public function setFilename(string $filename): static
     {
+        if ($filename === '') {
+            throw new \InvalidArgumentException('Filename cannot be empty');
+        }
+
         $this->filename = $filename;
 
         return $this;
