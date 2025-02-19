@@ -7,6 +7,7 @@ use App\Form\ImageType;
 use App\Service\FileService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -37,6 +38,11 @@ final class ImageController extends AbstractController
             return $this->redirectToRoute('list');
         }
         return $this->render('image/list.html.twig', ['form' => $form->createView(), 'images' => $images]);
+    }
+
+    #[Route('/get-single-image/{id}', name: 'getSingleImage', options: ['expose' => true])]
+    public function getSingleImage(Image $image) {
+        return new JsonResponse(['filename' => $image->getFilename()]);
     }
 
     #[Route('/edit-image/{id}', name: 'editImage')]
