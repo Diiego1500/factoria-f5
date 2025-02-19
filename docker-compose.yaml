@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db_app:
+    container_name: db_app
+    image: mariadb:10.5
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: image_management
+    volumes:
+      - image_management:/var/lib/mysql
+    ports:
+      - 3306:3306
+  web:
+    depends_on:
+      - db_app
+    container_name: image_management
+    build: .
+    volumes:
+      - .:/var/www/html/image_management
+    ports:
+      - "80:80"
+      -
+volumes:
+  image_management:
