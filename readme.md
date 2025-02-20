@@ -1,5 +1,7 @@
 # Prueba Técnica DevOps
 
+Puedes visualizar el despliegue con la IP publica de la instancia EC2: [http://3.147.77.232/](http://3.147.77.232/ "http://3.147.77.232/")
+
 ## Descripción General
 
 Este proyecto gestiona imágenes, permitiendo su creación, visualización, edición y eliminación. Cada imagen incluye un título, fecha de creación y descripción.
