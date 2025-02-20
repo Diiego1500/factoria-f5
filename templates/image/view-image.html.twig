@@ -10,7 +10,9 @@
             <span>Fecha de creación: {{ image.creationdate | date('Y-m-d') }}</span>
             <div>Descripción: <i>{{ image.description }}</i></div>
             <hr class="mb-5">
-                <img src="{{ aws_bucket_link ~ image.filename }}" alt="">
+            <div class="text-center">
+                <img src="{{ aws_bucket_link ~ image.filename }}" alt="{{ image.filename }}" class="w-100">
+            </div>
             <hr>
             <a href="{{ path('list') }}" class="btn btn-primary">Regresar</a>
         </div>
