@@ -10,48 +10,34 @@
     <div class="container">
         <div class="text-center p-4 my-3 border bg-white rounded">
             <h1>Biblioteca de Imágenes.</h1>
-            <h4>Versión de la plataforma: V2</h4>
+            <h4>Versión de la plataforma: V3</h4>
             <p>En el siguiente botón encontrarás un formulario para subir tus imágenes favoritas</p>
             <div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UploadImageModal">Sube y Comparte tus imagenes</button></div>
             <div class="my-2"><a class="btn btn-info" target="_blank" href="{{ asset('assets/unit-testing/results.html') }}">Pruebas Unitarias</a></div>
         </div>
-        <div class="masonry">
-            {% for image in images %}
-                <div class="masonry-item">
-                    <div class="card">
-                        <div class="row g-0">
-                            <div class="col-md-4 d-flex align-items-center">
-                                <img src="{{ aws_bucket_link_thumbnail ~ image.filename }}"
-                                     class="img-fluid rounded-start image"
-                                     alt="{{ image.title }}"
-                                     onerror="this.onerror=null; this.src='{{ aws_bucket_link ~ image.filename }}';"
-                                     onclick="window.location.href='{{ path('getSingleImage', {id: image.id}) }}'">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title text-uppercase">{{ image.title }}</h5>
-                                    <p class="card-text">{{ image.description }}</p>
-                                </div>
-                                <div class="card-footer d-flex flex-column align-items-center gap-2">
-                                    <small class="text-muted text-center">{{ image.creation_date|date('Y-m-d') }}</small>
-                                    <div class="w-100 d-flex flex-column gap-1">
-                                        <a href="{{ path('editImage', {id: image.id}) }}"
-                                           class="btn btn-primary btn-sm w-100">
-                                            Editar
-                                        </a>
-                                        <a href="{{ path('deleteImage', {id: image.id}) }}"
-                                           class="btn btn-danger btn-sm w-100 delete-image">
-                                            Eliminar
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="container">
+            <div class="list-group">
+                {% for image in images %}
+                    <div class="list-group-item d-flex align-items-center gap-3">
+                        <img src="{{ aws_bucket_link_thumbnail ~ image.filename }}" class="rounded image" width="80"
+                             alt="{{ image.title }}"
+                             onerror="this.onerror=null; this.src='{{ aws_bucket_link ~ image.filename }}';"
+                             onclick="window.location.href='{{ path('getSingleImage', {id: image.id}) }}'"
+                        >
+                        <div class="flex-grow-1">
+                            <h5 class="mb-1">{{ image.title }}</h5>
+                            <p class="mb-1">{{ image.description }}</p>
+                            <small class="text-muted">{{ image.creation_date|date('Y-m-d') }}</small>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <a href="{{ path('editImage', {id: image.id}) }}" class="btn btn-outline-primary btn-sm">✏️ Editar</a>
+                            <a href="{{ path('deleteImage', {id: image.id}) }}" class="btn btn-outline-danger btn-sm delete-image">🗑️ Eliminar</a>
                         </div>
                     </div>
-                </div>
-            {% else %}
-                <div class="alert alert-warning my-4">No images available.</div>
-            {% endfor %}
+                {% else %}
+                    <div class="alert alert-warning my-4">No images available.</div>
+                {% endfor %}
+            </div>
         </div>
 
     </div>
