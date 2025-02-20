@@ -40,9 +40,9 @@ final class ImageController extends AbstractController
         return $this->render('image/list.html.twig', ['form' => $form->createView(), 'images' => $images]);
     }
 
-    #[Route('/get-single-image/{id}', name: 'getSingleImage', options: ['expose' => true])]
+    #[Route('/get-single-image/{id}', name: 'getSingleImage')]
     public function getSingleImage(Image $image) {
-        return new JsonResponse(['filename' => $image->getFilename()]);
+        return $this->render('image/view-image.html.twig', ['image' => $image]);
     }
 
     #[Route('/edit-image/{id}', name: 'editImage')]

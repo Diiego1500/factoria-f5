@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <div class="p-4 my-4 bg-white border rounded">
+            <h3 class="mt-3">{{ image.title | upper }}</h3>
+            <span>Fecha de creación: {{ image.creationdate | date('Y-m-d') }}</span>
+            <div>Descripción: <i>{{ image.description }}</i></div>
+            <hr class="mb-5">
+                <img src="{{ aws_bucket_link ~ image.filename }}" alt="">
+            <hr>
+            <a href="{{ path('list') }}" class="btn btn-primary">Regresar</a>
+        </div>
+    </div>
+{% endblock %}

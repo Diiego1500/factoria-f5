@@ -3,8 +3,6 @@
 {% block title %}{{ parent() }}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 {% endblock %}
 {% block body %}
@@ -23,10 +21,9 @@
                         <img src="{{ aws_bucket_link_thumbnail ~ image.filename }}"
                              class="card-img-top image"
                              alt="{{ image.title }}"
-                             data-id="{{ image.id }}"
-                             data-bs-toggle="modal"
-                             data-bs-target="#ShowImageModa"
-                             onerror="this.onerror=null; this.src='{{ aws_bucket_link ~ image.filename }}';">
+                             onerror="this.onerror=null; this.src='{{ aws_bucket_link ~ image.filename }}';"
+                            onclick="window.location.href='{{ path('getSingleImage', {id: image.id}) }}'"
+                        >
                         <div class="card-body">
                             <h5 class="card-title text-uppercase">{{ image.title }}</h5>
                             <p class="card-text">{{ image.description }}</p>
