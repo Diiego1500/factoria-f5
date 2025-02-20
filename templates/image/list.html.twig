@@ -10,7 +10,7 @@
     <div class="container">
         <div class="text-center p-4 my-3 border bg-white rounded">
             <h1>Biblioteca de Imágenes.</h1>
-            <h4>Versión de la plataforma: V1</h4>
+            <h4>Versión de la plataforma: V2</h4>
             <p>En el siguiente botón encontrarás un formulario para subir tus imágenes favoritas</p>
             <div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UploadImageModal">Sube y Comparte tus imagenes</button></div>
             <div class="my-2"><a class="btn btn-info" target="_blank" href="{{ asset('assets/unit-testing/results.html') }}">Pruebas Unitarias</a></div>
@@ -19,28 +19,32 @@
             {% for image in images %}
                 <div class="masonry-item">
                     <div class="card">
-                        <img src="{{ aws_bucket_link_thumbnail ~ image.filename }}"
-                             class="card-img-top image"
-                             alt="{{ image.title }}"
-                             onerror="this.onerror=null; this.src='{{ aws_bucket_link ~ image.filename }}';"
-                            onclick="window.location.href='{{ path('getSingleImage', {id: image.id}) }}'"
-                        >
-                        <div class="card-body">
-                            <h5 class="card-title text-uppercase">{{ image.title }}</h5>
-                            <p class="card-text">{{ image.description }}</p>
-                        </div>
-                        <div class="card-footer d-flex flex-column align-items-center gap-2">
-                            <small class="text-muted text-center">{{ image.creation_date|date('Y-m-d') }}</small>
-
-                            <div class="w-100 d-flex flex-column gap-1">
-                                <a href="{{ path('editImage', {id: image.id}) }}"
-                                   class="btn btn-primary btn-sm w-100">
-                                    Editar
-                                </a>
-                                <a href="{{ path('deleteImage', {id: image.id}) }}"
-                                   class="btn btn-danger btn-sm w-100 delete-image">
-                                    Eliminar
-                                </a>
+                        <div class="row g-0">
+                            <div class="col-md-4 d-flex align-items-center">
+                                <img src="{{ aws_bucket_link_thumbnail ~ image.filename }}"
+                                     class="img-fluid rounded-start image"
+                                     alt="{{ image.title }}"
+                                     onerror="this.onerror=null; this.src='{{ aws_bucket_link ~ image.filename }}';"
+                                     onclick="window.location.href='{{ path('getSingleImage', {id: image.id}) }}'">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase">{{ image.title }}</h5>
+                                    <p class="card-text">{{ image.description }}</p>
+                                </div>
+                                <div class="card-footer d-flex flex-column align-items-center gap-2">
+                                    <small class="text-muted text-center">{{ image.creation_date|date('Y-m-d') }}</small>
+                                    <div class="w-100 d-flex flex-column gap-1">
+                                        <a href="{{ path('editImage', {id: image.id}) }}"
+                                           class="btn btn-primary btn-sm w-100">
+                                            Editar
+                                        </a>
+                                        <a href="{{ path('deleteImage', {id: image.id}) }}"
+                                           class="btn btn-danger btn-sm w-100 delete-image">
+                                            Eliminar
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -49,6 +53,7 @@
                 <div class="alert alert-warning my-4">No images available.</div>
             {% endfor %}
         </div>
+
     </div>
     {# ---------- Modals ---------- #}
     <div class="modal fade" id="UploadImageModal" tabindex="-1" aria-labelledby="UploadImageModalLabel" aria-hidden="true">
