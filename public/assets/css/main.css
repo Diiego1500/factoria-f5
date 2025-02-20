@@ -1,0 +1,27 @@
+body {
+    background-color: #3C3D37;
+    font-family: "Roboto", serif;
+}
+
+.w-10 {
+    width: 10%;
+}
+
+.image:hover {
+    cursor: pointer;
+}
+
+.masonry {
+    column-count: 4;
+    column-gap: 1rem;
+}
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+}
+@media (max-width: 768px) {
+    .masonry { column-count: 2; }
+}
+@media (max-width: 576px) {
+    .masonry { column-count: 1; }
+}

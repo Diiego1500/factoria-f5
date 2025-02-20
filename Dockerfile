@@ -30,9 +30,6 @@ RUN apt-get install -y libapache2-mod-php8.2 \
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
     php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-# Instalar node y npm
-RUN apt install -y nodejs npm
-
 #Configuracion de apache para Symfony
 COPY image_management.conf /etc/apache2/sites-available
 
@@ -45,4 +42,4 @@ COPY . /var/www/html/image_management
 
 RUN a2enmod rewrite
 
-CMD bash -c "/usr/sbin/apache2ctl -D FOREGROUND"
+CMD bash -c "composer install && php bin/console doctrine:schema:update --force && /usr/sbin/apache2ctl -D FOREGROUND"
