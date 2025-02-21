@@ -4,7 +4,7 @@ Puedes visualizar el despliegue con la IP publica de la instancia EC2: [http://3
 
 Datos Prometheus del servicio: [Prometheus](http://3.147.77.232:9090/ "Prometheus")
 
-Video Explicativo: [Video Aquí]
+Video Explicativo: [Aquí](https://www.youtube.com/watch?v=RPgT3-VA1xY "Aquí")
 
 
 ## Descripción General
